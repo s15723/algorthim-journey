@@ -1,0 +1,27 @@
+{
+  "name": "algorthim-journey",
+  "version": "1.0.0",
+  "description": "a project to review and deep in basic algorthim",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s15723/algorthim-journey.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/s15723/algorthim-journey/issues"
+  },
+  "homepage": "https://github.com/s15723/algorthim-journey#readme",
+  "devDependencies": {
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "@types/node": "^14.14.14"
+  }
+}
