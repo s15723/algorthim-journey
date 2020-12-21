@@ -1,6 +1,6 @@
 import {ListNode, createLinkedList, printList} from './helper'
 /**
- * 反转链表的一部分，leetcode 92
+ * 反转链表的一部分，leetcode 92 25
  * 实现递归重点在于明确函数的定义
  */
 // 反转整个链表
