@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let isMount = true
+      let workInProgressHook = null // 指向当前正在执行的 hooks
+
+      const fiber = {
+        memoizedState: null,
+        stateNode: App,
+      }
+
+      function run() {
+        workInProgressHook = fiber.memoizedState
+        const app = fiber.stateNode()
+        isMount = false
+        return app
+      }
+
+      function dispatchAction(queue, action) {
+        const update = {
+          action,
+          next: null
+        }
+        if (queue.pending === null) {
+          update.next = update
+        } else {
+          update.next = queue.pending.next
+          queue.pending.next = update
+        }
+        queue.pending = update
+
+        run()
+      }
+
+      function useState(initialState) {
+        let hook
+
+        if (isMount) {
+          hook = {
+            queue: {
+              pending: null
+            },
+            memoizedState: initialState,
+            next: null
+          }
+
+          if (!fiber.memoizedState) {
+            fiber.memoizedState = hook
+          } else {
+            workInProgressHook.next = hook
+          }
+          workInProgressHook = hook
+        } else {
+          hook = workInProgressHook
+          workInProgressHook = workInProgressHook.next
+        }
+
+        let baseState = hook.memoizedState
+        if (hook.queue.pending) {
+          let curUpdate = hook.queue.pending.next
+
+          do {
+            const action = curUpdate.action
+            baseState = action(baseState)
+            curUpdate = curUpdate.next
+          } while(curUpdate !== hook.queue.pending.next)
+
+          hook.queue.pending = null
+        }
+        hook.memoizedState = baseState
+
+        return [baseState, dispatchAction.bind(null, hook.queue)]
+      }
+
+      function App() {
+        const [num, setNum] = useState(0)
+        const [status, setStatus] = useState(false)
+
+        console.log('isMount', isMount)
+        console.log(num)
+        console.log(status)
+
+        return {
+          onClick() {
+            setNum((num) => num + 1)
+          },
+          trigger() {
+            setStatus(status => !status)
+          }
+        }
+      }
+
+      window.app = run()
+    </script>
+  </body>
+</html>
