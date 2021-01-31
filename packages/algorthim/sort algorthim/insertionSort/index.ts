@@ -3,7 +3,19 @@
  * 空间 O(1)
  * 时间(最坏的情况) 整体复杂度还是 O(n^2),对于有序数组 O(n)
  */
-import {testSort, generateRandomArray} from '../helper'
+import { testSort, generateRandomArray } from '../helper'
+
+export const insertionSort2 = (arr: number[], l: number, r: number) => {
+  for (let i = l; i <= r; i++) {
+    const e = arr[i]
+    let j: number
+    for (j = i; j - 1 >= l && e < arr[j - 1]; j--) {
+      arr[j] = arr[j - 1]
+    }
+    arr[j] = e
+  }
+}
+
 export function insertionSort(arr: number[]) {
   const n = arr.length
 
@@ -31,7 +43,7 @@ export function insertionSortReverseOrder(arr: number[]) {
     // 将 arr[i] 插入合适的位置，维持循环不变量
     let j: number
     for (j = i; j < n - 1 && e > arr[j + 1]; j++) {
-      arr[j] = arr[j+1]
+      arr[j] = arr[j + 1]
     }
     arr[j] = e
   }
