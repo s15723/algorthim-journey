@@ -30,7 +30,7 @@ export function mergeSort(arr: number[]) {
       } else if (j > r) {
         arr[k] = tmp[i - l]
         i++
-      } else if (tmp[i - l] < tmp[j - l]) {
+      } else if (tmp[i - l] <= tmp[j - l]) {
         arr[k] = tmp[i - l]
         i++
       } else {
