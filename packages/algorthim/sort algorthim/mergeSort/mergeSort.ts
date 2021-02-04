@@ -1,6 +1,8 @@
 /**
  * 时间 O(nlogn)
  * 空间 O(n)
+ * 
+ * 二叉树的后续遍历
  */
 import { testSort, generateRandomArray } from '../helper'
 export function mergeSort(arr: number[]) {
