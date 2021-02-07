@@ -4,6 +4,7 @@ import lower from './lower'
  * lower_floor
  * 存在元素，返回最小索引
  * 不存在，返回返回 lower
+ * 
  */
 export const lower_floor = (arr: number[], target: number) => {
   // 求解 < target 的最大索引
@@ -18,6 +19,8 @@ export const lower_floor = (arr: number[], target: number) => {
  * upper_floor
  * 存在元素，返回最大索引
  * 不存在，返回 lower
+ * 
+ * <= target 的最大索引
  */
 export const upper_floor = (arr: number[], target: number) => {
   // 求解 < target 的最大索引
